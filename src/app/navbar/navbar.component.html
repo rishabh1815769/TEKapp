@@ -1,0 +1,28 @@
+<nav class="navbar navbar-light bg-dark">
+  <div class="container-fluid">
+    <a style="color: white" class="navbar-brand" routerLink="/home"
+      >Kitchen Story</a
+    >
+    <form class="d-flex">
+      <input
+        name="search"
+        [(ngModel)]="searchtext"
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button (click)="search()" class="btn btn-success" type="submit">
+        Search
+      </button>
+    </form>
+    <div class="d-flex">
+      <button *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-success">
+        Login
+      </button>
+      <button *ngIf="isLoggedIn" class="btn btn-danger" (click)="logout()">
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>
