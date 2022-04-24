@@ -11,19 +11,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./cakelist.component.css']
 })
 export class CakelistComponent implements OnInit {
-  cakes:any = [
-
-  ]
 
   constructor(private mainservice: MainserviceService, private notifySevice: NotificationService, private http: HttpClient, private loader:NgxUiLoaderService, private router: Router ) { 
     var url = "https://apifromashu.herokuapp.com/api/allcakes"
   this.http.get(url).subscribe({
     next:(response:any)=>{
-      console.log("Response from cakes api", response)
+      console.log("Response from all cakes api", response)
       this.cakes = response.data
     },
     error:(error)=>{
-      console.log("Error from cakes api",error)
+      console.log("Error from all cakes api",error)
     }
   })
 
@@ -50,15 +47,11 @@ export class CakelistComponent implements OnInit {
     this.mainservice.popularity(this.cakes)
   }
 
-  showCakedetails(index) {
-    this.router.navigate(['/detail', this.cakes[index].cakeid])
-  }
+  cakes:any =[]
 
   
 
   ngOnInit(): void {
   }
-
-  @Input() cakedata:any
 
 }

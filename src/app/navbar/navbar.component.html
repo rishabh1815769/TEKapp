@@ -20,6 +20,14 @@
       <button *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-success">
         Login
       </button>
+      <button
+        style="margin: 0 5px"
+        *ngIf="isLoggedIn"
+        routerLink="/cart"
+        class="btn btn-success"
+      >
+        Cart
+      </button>
       <button *ngIf="isLoggedIn" class="btn btn-danger" (click)="logout()">
         Logout
       </button>

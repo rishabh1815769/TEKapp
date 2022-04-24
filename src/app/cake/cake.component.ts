@@ -8,9 +8,16 @@ import { Router } from '@angular/router';
 })
 export class CakeComponent{
       
-constructor(private router: Router) { }
+constructor(private router: Router) {
+
+  console.log(">>>>>>>>>>>>>>>>>>>>>", this.cakedata)
+ }
+ showCakeDetails(){
+   this.router.navigate(['/detail',this.cakedata.cakeid])
+ }
 
   ngOnInit(): void {
+    console.log(">>>>>>>>>>>>> .....................", this.cakedata)
   }
 
   @Input() cakedata:any

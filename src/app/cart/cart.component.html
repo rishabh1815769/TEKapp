@@ -17,10 +17,16 @@
         <td>
           <img style="height: 60px; width: 60px" [src]="item.image" alt="" />
         </td>
-        <td>{{ item.price }}</td>
+        <td>{{ item.price | currency: "INR" }}</td>
         <td>{{ item.quantity }}</td>
-        <td><button class="btn btn-danger">Remove</button></td>
+        <td>
+          <button class="btn btn-danger" (click)="removeItem(i)">Remove</button>
+        </td>
       </tr>
     </tbody>
   </table>
+  <div>Total Price: {{ totalPrice | currency: "INR" }}</div>
+  <button class="btn btn-warning" routerLink="/checkout" style="float: right">
+    Checkout
+  </button>
 </div>

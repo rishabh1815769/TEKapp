@@ -10,7 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 import { CarouselComponent } from './carousel/carousel.component';
 import { CakeComponent } from './cake/cake.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { CakelistComponent } from './cakelist/cakelist.component';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
@@ -22,6 +22,11 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { CakedetailComponent } from './cakedetail/cakedetail.component';
 import { SearchComponent } from './search/search.component';
 import { CartComponent } from './cart/cart.component';
+import { HighlightDirective } from './highlight.directive';
+import { DiscountPipe } from './discount.pipe';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { AddressComponent } from './address/address.component';
+import { PaymentComponent } from './payment/payment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +41,12 @@ import { CartComponent } from './cart/cart.component';
     PagenotfoundComponent,
     CakedetailComponent,
     SearchComponent,
-    CartComponent
+    CartComponent,
+    HighlightDirective,
+    DiscountPipe,
+    CheckoutComponent,
+    AddressComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +56,7 @@ import { CartComponent } from './cart/cart.component';
     FormsModule,
     CommonModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     NgxUiLoaderHttpModule.forRoot({showForeground: true, minTime: 300}),
     ToastrModule.forRoot()
     
