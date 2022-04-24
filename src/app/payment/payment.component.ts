@@ -8,73 +8,51 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./payment.component.css'],
 })
 export class PaymentComponent implements OnInit {
-  cartitems: any = [];
-  totalPrice: any = 0;
-  userAddressdata: any = {};
-  userCakesData: any = [];
+  userdetails: any;
+  totalprice: any;
+  cakes: any;
+  orderdetails: any = {};
 
   constructor(
     private mainservice: MainserviceService,
     private http: HttpClient
   ) {
-    var url = 'https://apifromashu.herokuapp.com/api/cakecart';
-    let myheaders = new HttpHeaders();
-    myheaders = myheaders.append('authtoken', localStorage['token']);
-    var options = {
-      headers: myheaders,
-    };
-    var body = {};
-    this.mainservice.getCartItems(url, body, options).subscribe({
-      next: (response: any) => {
-        console.log('Response from cart items api', response);
-        this.cartitems = response.data;
+    let cartDetails = this.mainservice.sendCartDetails();
 
-        this.cartitems.forEach((each: any) => {
-          this.totalPrice = this.totalPrice + each.price * each.quantity;
-        });
-      },
-      error: (error) => {
-        console.log('Error from cart items api', error);
-      },
-    });
+    this.userdetails = this.mainservice.sendUserDetails();
 
-    this.userAddressdata = this.mainservice.userdata;
-    // this.userCakesData = this.mainservice.cakesArray;
-    // console.log('USERDATA');
-    // console.log(this.userAddressdata);
-    // console.log('CAKE ARRAY');
-    // console.log(this.userCakesData);
+    this.totalprice = cartDetails.totalPrice;
+    this.cakes = cartDetails.cartitems;
+
+    console.log('CART DETAILS', cartDetails);
   }
 
-  ngOnInit(): void {}
-
-  placeOrder() {
+  placeorder() {
+    var url = 'https://apifromashu.herokuapp.com/api/addcakeorder';
     let myheaders = new HttpHeaders();
     myheaders = myheaders.append('authtoken', localStorage['token']);
-    var url = 'https://apifromashu.herokuapp.com/api/addcakeorder';
-
     var options = {
       headers: myheaders,
     };
     var body = {
-      cakes: this.cartitems.data,
-      price: this.totalPrice,
-      name: this.userAddressdata.name,
-      address: this.userAddressdata.address,
-      city: this.userAddressdata.city,
-      pincode: this.userAddressdata.pincode,
-      phone: this.userAddressdata.phone,
+      cakes: this.cakes,
+      price: this.totalprice,
+      name: this.userdetails.name,
+      address: this.userdetails.address,
+      city: this.userdetails.city,
+      pincode: this.userdetails.pincode,
+      phone: this.userdetails.phone,
     };
     this.mainservice.placeOrder(url, body, options).subscribe({
       next: (response: any) => {
-        console.log('response from place order api', response);
-        // if(response.data){
-        //   this.router.navigate(["/cart"])
-        // }
+        console.log('Response from add cake order api', response);
+        this.orderdetails = response.order;
       },
-      error: (error) => {
+      error: (error: any) => {
         console.log('Error from place order api', error);
       },
     });
   }
+
+  ngOnInit(): void {}
 }

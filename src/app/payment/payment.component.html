@@ -43,7 +43,7 @@
             </h4>
             <ul class="list-group mb-3">
               <li
-                *ngFor="let item of cartitems"
+                *ngFor="let item of cakes"
                 class="list-group-item d-flex justify-content-between lh-sm"
               >
                 <div>
@@ -59,7 +59,7 @@
 
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (INR)</span>
-                <strong>{{ totalPrice | currency: "INR" }}</strong>
+                <strong>{{ totalprice | currency: "INR" }}</strong>
               </li>
             </ul>
           </div>
@@ -71,7 +71,7 @@
                   <label for="">Name</label>
                   <input
                     disabled
-                    placeholder="{{ userAddressdata[0].name }}"
+                    placeholder="{{ userdetails.name }}"
                     name="name"
                     type="text"
                     class="form-control"
@@ -84,7 +84,7 @@
                     name="address"
                     type="text"
                     class="form-control"
-                    placeholder="{{ userAddressdata[0].address }}"
+                    placeholder="{{ userdetails.address }}"
                   />
                 </div>
 
@@ -92,7 +92,7 @@
                   <label for="">City</label>
                   <input
                     disabled
-                    placeholder="{{ userAddressdata[0].city }}"
+                    placeholder="{{ userdetails.city }}"
                     name="city"
                     type="text"
                     class="form-control"
@@ -102,7 +102,7 @@
                   <label for="">Pincode</label>
                   <input
                     disabled
-                    placeholder="{{ userAddressdata[0].pincode }}"
+                    placeholder="{{ userdetails.pincode }}"
                     name="pincode"
                     type="text"
                     class="form-control"
@@ -112,7 +112,7 @@
                   <label for="">Phone</label>
                   <input
                     disabled
-                    placeholder="{{ userAddressdata[0].phone }}"
+                    placeholder="{{ userdetails.phone }}"
                     name="phone"
                     type="text"
                     class="form-control"
@@ -123,12 +123,53 @@
                   <input disabled type="checkbox" name="" checked />Cash On
                   Delivery
                   <div>
-                    <button class="btn btn-primary" (click)="placeOrder()">
+                    <button
+                      (click)="placeorder()"
+                      class="btn btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
                       Place Order
                     </button>
                   </div>
                 </div>
               </form>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Order Placed
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      Order Placed Successfully! Please visit us again.
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

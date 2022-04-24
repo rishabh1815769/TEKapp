@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class MainserviceService {
-  userdata: any = [];
-  cakesArray: any = [];
+  userCheckoutDetails: any = {};
+  cartDetails: any = {};
 
   popularity(data: any) {
     data.sort((low, high) => {
@@ -33,16 +33,21 @@ export class MainserviceService {
     return this.http.post(url, body, options);
   }
 
-  addUserAddress(user: any) {
-    this.userdata.push(user);
+  getCartDataFromCartComponent(cartDetails: any) {
+    this.cartDetails = cartDetails;
   }
 
-  addCakesArray(cartitems: any) {
-    this.cakesArray.push(cartitems);
+  getUserDataFromAddressComponent(userdata: any) {
+    this.userCheckoutDetails = userdata;
   }
 
-  showAddress(): any {
-    return this.userdata;
+  sendCartDetails() {
+    console.log('CART DETAILS SERVICE', this.cartDetails);
+    return this.cartDetails;
+  }
+
+  sendUserDetails() {
+    return this.userCheckoutDetails;
   }
 
   constructor(private http: HttpClient) {}

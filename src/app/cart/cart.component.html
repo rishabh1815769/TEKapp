@@ -26,7 +26,12 @@
     </tbody>
   </table>
   <div>Total Price: {{ totalPrice | currency: "INR" }}</div>
-  <button class="btn btn-warning" routerLink="/checkout" style="float: right">
+  <button
+    (click)="checkout()"
+    class="btn btn-warning"
+    routerLink="/checkout"
+    style="float: right"
+  >
     Checkout
   </button>
 </div>

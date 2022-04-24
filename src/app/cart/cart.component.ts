@@ -23,7 +23,6 @@ export class CartComponent implements OnInit {
       next: (response: any) => {
         console.log('Response from cart items api', response);
         this.cartitems = response.data;
-        this.mainservice.addCakesArray(this.cartitems);
         this.cartitems.forEach((each: any) => {
           this.totalPrice = this.totalPrice + each.price * each.quantity;
         });
@@ -32,8 +31,14 @@ export class CartComponent implements OnInit {
         console.log('Error from cart items api', error);
       },
     });
-    console.log('CART ITEMS');
-    console.log(this.cartitems);
+  }
+
+  checkout() {
+    let cartDetails: any = {
+      cartitems: this.cartitems,
+      totalPrice: this.totalPrice,
+    };
+    this.mainservice.getCartDataFromCartComponent(cartDetails);
   }
 
   removeItem(index: any) {

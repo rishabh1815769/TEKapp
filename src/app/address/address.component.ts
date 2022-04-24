@@ -4,28 +4,23 @@ import { MainserviceService } from '../mainservice.service';
 @Component({
   selector: 'app-address',
   templateUrl: './address.component.html',
-  styleUrls: ['./address.component.css']
+  styleUrls: ['./address.component.css'],
 })
 export class AddressComponent implements OnInit {
-  userdetails:any=[]
-  
+  userdetails: any = {};
 
-  constructor(private mainservice: MainserviceService) { }
+  constructor(private mainservice: MainserviceService) {}
 
-  addAddress(){
-    let currentUser:any ={
+  addAddress() {
+    let userCheckoutDetails: any = {
       name: this.userdetails.name,
-    address: this.userdetails.address,
-    city: this.userdetails.city,
-    pincode: this.userdetails.pincode,
-    phone: this.userdetails.phone
-
+      address: this.userdetails.address,
+      city: this.userdetails.city,
+      pincode: this.userdetails.pincode,
+      phone: this.userdetails.phone,
     };
-    this.mainservice.addUserAddress(currentUser)
-    }
-  
-
-  ngOnInit(): void {
+    this.mainservice.getUserDataFromAddressComponent(userCheckoutDetails);
   }
 
+  ngOnInit(): void {}
 }

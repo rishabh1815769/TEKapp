@@ -3,11 +3,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-
+import { allIcons } from 'ngx-bootstrap-icons';
 import { CarouselComponent } from './carousel/carousel.component';
 import { CakeComponent } from './cake/cake.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,6 +27,7 @@ import { DiscountPipe } from './discount.pipe';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AddressComponent } from './address/address.component';
 import { PaymentComponent } from './payment/payment.component';
+import { MyordersComponent } from './myorders/myorders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,22 +47,26 @@ import { PaymentComponent } from './payment/payment.component';
     DiscountPipe,
     CheckoutComponent,
     AddressComponent,
-    PaymentComponent
+    PaymentComponent,
+    MyordersComponent,
   ],
   imports: [
     BrowserModule,
     NgxUiLoaderModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxBootstrapIconsModule.pick(allIcons, {
+      width: '1.5em',
+      height: '1.5em',
+    }),
     FormsModule,
     CommonModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NgxUiLoaderHttpModule.forRoot({showForeground: true, minTime: 300}),
-    ToastrModule.forRoot()
-    
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true, minTime: 300 }),
+    ToastrModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
