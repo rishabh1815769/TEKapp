@@ -7,36 +7,33 @@ import { MainserviceService } from '../mainservice.service';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
-  
 })
 export class NavbarComponent implements OnInit {
-  isLoggedIn: any
-  searchtext:any
+  isLoggedIn: any;
+  searchtext: any;
 
   logout() {
     localStorage.clear();
   }
 
-  constructor(private mainservice: MainserviceService,private router: Router) { 
-    this.isLoggedIn = localStorage["token"]?true:false
+  constructor(private mainservice: MainserviceService, private router: Router) {
+    this.isLoggedIn = localStorage['token'] ? true : false;
   }
 
   ngDoCheck() {
-    if(localStorage["token"]) {
-      this.isLoggedIn = true
+    if (localStorage['token']) {
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
     }
-    else{
-      this.isLoggedIn = false
-    }
   }
 
-  search(){
-    if(this.searchtext)
-    this.router.navigate(["/search"],{queryParams:{q:this.searchtext}})
-
+  search() {
+    if (this.searchtext)
+      this.router.navigate(['/search'], {
+        queryParams: { q: this.searchtext },
+      });
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

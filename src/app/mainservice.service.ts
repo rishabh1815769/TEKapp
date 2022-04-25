@@ -33,6 +33,16 @@ export class MainserviceService {
     return this.http.post(url, body, options);
   }
 
+  getmyorders(url: any, body: any, options: any) {
+    return this.http.post(url, body, options);
+  }
+  removeOneCakefromCart(url: any, body: any, options: any) {
+    return this.http.post(url, body, options);
+  }
+  removeCakefromCart(url: any, body: any, options: any) {
+    return this.http.post(url, body, options);
+  }
+
   getCartDataFromCartComponent(cartDetails: any) {
     this.cartDetails = cartDetails;
   }
