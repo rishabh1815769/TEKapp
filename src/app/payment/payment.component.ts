@@ -11,20 +11,19 @@ export class PaymentComponent implements OnInit {
   userdetails: any;
   totalprice: any;
   cakes: any;
+  cartitems: any;
   orderdetails: any = {};
 
   constructor(
     private mainservice: MainserviceService,
     private http: HttpClient
   ) {
-    let cartDetails = this.mainservice.sendCartDetails();
+    this.cartitems = this.mainservice.cartitems;
 
-    this.userdetails = this.mainservice.sendUserDetails();
+    this.userdetails = this.mainservice.userdetails;
 
-    this.totalprice = cartDetails.totalPrice;
-    this.cakes = cartDetails.cartitems;
-
-    console.log('CART DETAILS', cartDetails);
+    this.totalprice = this.mainservice.price;
+    this.cakes = this.cartitems;
   }
 
   placeorder() {

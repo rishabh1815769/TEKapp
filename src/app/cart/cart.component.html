@@ -39,7 +39,7 @@
             <td>{{ item.price | currency: "INR" }}</td>
             <td>
               <button
-                (click)="removeOneCakefromCart(i)"
+                (click)="decreaseQuantity(i)"
                 id="round"
                 type="button"
                 class="btn btn-danger btn-sm py-0"
@@ -48,8 +48,7 @@
               </button>
               {{ item.quantity }}
               <button
-                (click)="addToCart(i)"
-                (click)="updatetotalprice()"
+                (click)="increaseQuantity(i)"
                 id="round"
                 type="button"
                 class="btn btn-success btn-sm py-0"
@@ -59,7 +58,7 @@
             </td>
             <td>
               <button (click)="removeCakefromCart(i)" class="btn btn-danger">
-                Remove
+                <i i-bs name="trash3"></i>
               </button>
             </td>
           </tr>

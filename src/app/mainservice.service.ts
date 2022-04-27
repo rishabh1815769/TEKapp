@@ -5,8 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class MainserviceService {
-  userCheckoutDetails: any = {};
+  userdetails: any = {};
   cartDetails: any = {};
+  cartitems: any;
+  price: any;
 
   popularity(data: any) {
     data.sort((low, high) => {
@@ -29,6 +31,9 @@ export class MainserviceService {
   getCartItems(url: any, body: any, options: any) {
     return this.http.post(url, body, options);
   }
+  uploadImage(url: any, body: any, options: any) {
+    return this.http.post(url, body, options);
+  }
   placeOrder(url: any, body: any, options: any) {
     return this.http.post(url, body, options);
   }
@@ -41,23 +46,6 @@ export class MainserviceService {
   }
   removeCakefromCart(url: any, body: any, options: any) {
     return this.http.post(url, body, options);
-  }
-
-  getCartDataFromCartComponent(cartDetails: any) {
-    this.cartDetails = cartDetails;
-  }
-
-  getUserDataFromAddressComponent(userdata: any) {
-    this.userCheckoutDetails = userdata;
-  }
-
-  sendCartDetails() {
-    console.log('CART DETAILS SERVICE', this.cartDetails);
-    return this.cartDetails;
-  }
-
-  sendUserDetails() {
-    return this.userCheckoutDetails;
   }
 
   constructor(private http: HttpClient) {}

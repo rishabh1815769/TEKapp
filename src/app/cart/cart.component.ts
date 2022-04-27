@@ -35,57 +35,38 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-    let cartDetails: any = {
-      cartitems: this.cartitems,
-      totalPrice: this.totalPrice,
-    };
-    this.mainservice.getCartDataFromCartComponent(cartDetails);
+    this.mainservice.cartitems = this.cartitems;
+    this.mainservice.price = this.totalPrice;
+    this.router.navigate(['/checkout']);
   }
-  addToCart(index: any) {
-    if (localStorage['token']) {
-      let myheaders = new HttpHeaders();
-      myheaders = myheaders.append('authtoken', localStorage['token']);
-      var url = 'https://apifromashu.herokuapp.com/api/addcaketocart';
+  increaseQuantity(index: any) {
+    // hit the api
+    var url = 'https://apifromashu.herokuapp.com/api/addcaketocart';
+    var myheaders = new HttpHeaders();
+    myheaders = myheaders.append('authtoken', localStorage['token']);
+    var options = {
+      headers: myheaders,
+    };
 
-      var options = {
-        headers: myheaders,
-      };
-      console.log('PRICE', this.cartitems[index].name);
-      var body = {
-        cakeid: this.cartitems[index].cakeid,
-        name: this.cartitems[index].name,
-        weight: this.cartitems[index].weight,
-        price: this.cartitems[index].price,
-        image: this.cartitems[index].image,
-      };
-      this.mainservice.addCakeToCart(url, body, options).subscribe({
+    this.mainservice
+      .addCakeToCart(url, this.cartitems[index], options)
+      .subscribe({
         next: (response: any) => {
-          console.log('response from add to cart api', response);
           if (response.data) {
-            this.cartitems[index].quantity += 1;
-            this.router.navigate(['/cart']);
+            this.totalPrice = this.totalPrice + this.cartitems[index].price;
+            this.cartitems[index].quantity++;
           }
         },
-        error: (error) => {
-          console.log('Error from add to cart api', error);
+        error: (error: any) => {
+          console.log('error from decrease quantity api', error);
         },
       });
-      this.updatetotalprice();
-    } else {
-      this.router.navigate(['/login']);
-    }
   }
 
-  updatetotalprice() {
-    this.totalPrice = 0;
-    for (const iterator of this.cartitems) {
-      this.totalPrice += iterator.price * iterator.quantity;
-    }
-  }
-
-  removeOneCakefromCart(index: any) {
+  decreaseQuantity(index: any) {
+    // hit the api
     var url = 'https://apifromashu.herokuapp.com/api/removeonecakefromcart';
-    let myheaders = new HttpHeaders();
+    var myheaders = new HttpHeaders();
     myheaders = myheaders.append('authtoken', localStorage['token']);
     var options = {
       headers: myheaders,
@@ -93,20 +74,17 @@ export class CartComponent implements OnInit {
     var body = {
       cakeid: this.cartitems[index].cakeid,
     };
-    this.mainservice.removeOneCakefromCart(url, body, options).subscribe({
-      next: (response: any) => {
-        console.log('Response from remove one cake api', response);
 
-        this.router.navigate(['/cart']).then(() => {
-          window.location.reload();
-        });
+    this.mainservice.removeCakefromCart(url, body, options).subscribe({
+      next: (response: any) => {
+        console.log('Respose from remove one item api', response);
+        this.totalPrice = this.totalPrice - this.cartitems[index].price;
+        this.cartitems[index].quantity--;
       },
       error: (error: any) => {
-        console.log('Error from remove one cake api', error);
+        console.log('Errror fromapi  ,', error);
       },
     });
-
-    this.updatetotalprice();
   }
 
   removeCakefromCart(index: any) {
@@ -117,21 +95,22 @@ export class CartComponent implements OnInit {
       headers: myheaders,
     };
     var body = {
-      cakeid: this.cartitems[index].cakeid,
+      cakeid: this.cartitems[index]['cakeid'],
     };
     this.mainservice.removeCakefromCart(url, body, options).subscribe({
       next: (response: any) => {
         console.log('Response from remove cake api', response);
-
-        this.router.navigate(['/cart']).then(() => {
-          window.location.reload();
-        });
+        if (response.message == 'Removed whole cake  item from cart') {
+          this.totalPrice =
+            this.totalPrice -
+            this.cartitems[index].quantity * this.cartitems[index].price;
+          this.cartitems.splice(index, 1);
+        }
       },
       error: (error: any) => {
-        console.log('Error from remove cake api', error);
+        console.log('Error from remove cart api', error);
       },
     });
-    this.updatetotalprice();
   }
 
   ngOnInit(): void {}

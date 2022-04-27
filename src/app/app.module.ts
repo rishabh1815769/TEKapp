@@ -28,6 +28,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AddressComponent } from './address/address.component';
 import { PaymentComponent } from './payment/payment.component';
 import { MyordersComponent } from './myorders/myorders.component';
+import { AddcakeComponent } from './addcake/addcake.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { MyordersComponent } from './myorders/myorders.component';
     AddressComponent,
     PaymentComponent,
     MyordersComponent,
+    AddcakeComponent,
   ],
   imports: [
     BrowserModule,

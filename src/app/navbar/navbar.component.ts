@@ -20,11 +20,18 @@ export class NavbarComponent implements OnInit {
     this.isLoggedIn = localStorage['token'] ? true : false;
   }
 
+  isAdmin: any = false;
+  adminUsers: any = ['rishabh1815769@gmail.com'];
+
   ngDoCheck() {
     if (localStorage['token']) {
       this.isLoggedIn = true;
+      if (this.adminUsers.includes(localStorage['loggedinUser'])) {
+        this.isAdmin = true;
+      }
     } else {
       this.isLoggedIn = false;
+      this.isAdmin = false;
     }
   }
 

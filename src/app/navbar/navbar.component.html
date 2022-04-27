@@ -17,6 +17,15 @@
       </button>
     </form>
     <div class="d-flex">
+      <button
+        style="margin: 0 5px"
+        *ngIf="isLoggedIn"
+        routerLink="/addcake"
+        class="btn btn-primary"
+      >
+        <i i-bs name="plus-square-fill"></i>
+        Add New Cake
+      </button>
       <button *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-success">
         <i i-bs name="box-arrow-in-left"></i>
         Login

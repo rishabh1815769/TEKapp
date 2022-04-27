@@ -12,14 +12,7 @@ export class AddressComponent implements OnInit {
   constructor(private mainservice: MainserviceService) {}
 
   addAddress() {
-    let userCheckoutDetails: any = {
-      name: this.userdetails.name,
-      address: this.userdetails.address,
-      city: this.userdetails.city,
-      pincode: this.userdetails.pincode,
-      phone: this.userdetails.phone,
-    };
-    this.mainservice.getUserDataFromAddressComponent(userCheckoutDetails);
+    this.mainservice.userdetails = this.userdetails;
   }
 
   ngOnInit(): void {}
