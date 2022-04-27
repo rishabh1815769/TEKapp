@@ -47,7 +47,12 @@
       >
         <i i-bs name="box-seam"></i>
       </button>
-      <button *ngIf="isLoggedIn" class="btn btn-danger" (click)="logout()">
+      <button
+        *ngIf="isLoggedIn"
+        class="btn btn-danger"
+        routerLink="/home"
+        (click)="logout()"
+      >
         <i i-bs name="box-arrow-right"></i>
       </button>
     </div>
